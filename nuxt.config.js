@@ -43,6 +43,8 @@ export default {
         '@nuxtjs/axios',
         // https://go.nuxtjs.dev/pwa
         '@nuxtjs/pwa',
+        '@sirdiego/nuxt-auth-cognito-scheme',
+        '@nuxtjs/auth',
     ],
 
     // Axios module configuration: https://go.nuxtjs.dev/config-axios
@@ -60,4 +62,24 @@ export default {
 
     // Build Configuration: https://go.nuxtjs.dev/config-build
     build: {},
+
+    router: {
+        middleware: ['auth'],
+    },
+    auth: {
+        strategies: {
+            cognito: {
+                tokenType: 'Bearer',
+                globalToken: true,
+                tokenRequired: true,
+                tokenName: 'Authorization',
+                autoFetchUser: true,
+                userPoolId: '', // TODO: Need ID
+                clientId: '', // TODO: Need ID
+                refreshInterval: 5 * 60 * 1000, // Set to 0 to disable the browser interval
+                fetchUserCallback: false, // Can be used to put more information into the user object
+            },
+        },
+    },
+
 };
