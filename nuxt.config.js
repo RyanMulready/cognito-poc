@@ -43,6 +43,7 @@ export default {
         '@nuxtjs/axios',
         // https://go.nuxtjs.dev/pwa
         '@nuxtjs/pwa',
+        // https://github.com/sirdiego/nuxt-auth-cognito-scheme
         '@sirdiego/nuxt-auth-cognito-scheme',
         '@nuxtjs/auth',
     ],
@@ -63,6 +64,11 @@ export default {
     // Build Configuration: https://go.nuxtjs.dev/config-build
     build: {},
 
+    // https://nuxtjs.org/docs/configuration-glossary/configuration-runtime-config/
+    publicRuntimeConfig: {
+        AWS_COGNITO_USER_POOL_ID: process.env.AWS_COGNITO_USER_POOL_ID,
+        AWS_COGNITO_CLIENT_ID: process.env.AWS_COGNITO_CLIENT_ID,
+    },
     router: {
         middleware: ['auth'],
     },
@@ -74,12 +80,21 @@ export default {
                 tokenRequired: true,
                 tokenName: 'Authorization',
                 autoFetchUser: true,
-                userPoolId: '', // TODO: Need ID
-                clientId: '', // TODO: Need ID
+                userPoolId: process.env.AWS_COGNITO_USER_POOL_ID,
+                clientId: process.env.AWS_COGNITO_CLIENT_ID,
                 refreshInterval: 5 * 60 * 1000, // Set to 0 to disable the browser interval
                 fetchUserCallback: false, // Can be used to put more information into the user object
             },
         },
+        redirect: {
+            login: '/login',
+            logout: '/',
+            callback: '/',
+            home: '/',
+        },
+        plugins: [
+            { src: '@/plugins/auth-extended.js' },
+        ],
     },
 
 };
