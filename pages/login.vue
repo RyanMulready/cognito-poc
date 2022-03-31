@@ -1,6 +1,5 @@
 <template>
-    <b-form
-        @submit.prevent="onSubmit">
+    <b-form @submit.prevent="onSubmit">
         <b-form-group
             id="input-group-1"
             label="Username:"

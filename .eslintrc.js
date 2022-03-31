@@ -5,12 +5,7 @@ module.exports = {
         node: true,
         mocha: true,
     },
-    extends: [
-        'eslint-config-energysage',
-        'plugin:nuxt/recommended',
-        'plugin:jest/recommended',
-        'plugin:jest/style',
-    ],
+    extends: ['eslint-config-energysage', 'plugin:nuxt/recommended', 'plugin:jest/recommended', 'plugin:jest/style'],
     settings: {
         'import/resolver': {
             webpack: {

@@ -92,9 +92,6 @@ export default {
             callback: '/',
             home: '/',
         },
-        plugins: [
-            { src: '@/plugins/auth-extended.js' },
-        ],
+        plugins: [{ src: '@/plugins/auth-extended.js' }],
     },
-
 };

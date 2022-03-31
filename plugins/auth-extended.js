@@ -1,9 +1,4 @@
-/* eslint-disable no-console */
-import {
-    CognitoUserPool,
-    CognitoUser,
-    CognitoUserAttribute,
-} from 'amazon-cognito-identity-js';
+import { CognitoUserPool, CognitoUser, CognitoUserAttribute } from 'amazon-cognito-identity-js';
 
 export default async (ctx) => {
     const userPool = new CognitoUserPool({
@@ -12,9 +7,7 @@ export default async (ctx) => {
     });
     ctx.$auth.cognito = {
         userPool,
-        signup: async ({
-            username, email, password,
-        }) => {
+        signup: async ({ username, email, password }) => {
             const emailAttribute = new CognitoUserAttribute({
                 Name: 'email',
                 Value: email,
@@ -74,7 +67,7 @@ export default async (ctx) => {
                 await ctx.$auth.loginWith('cognito', { data: { username, password } });
                 return true;
             } catch (e) {
-                const state = (e.message.split('.')).pop().split(' ').shift();
+                const state = e.message.split('.').pop().split(' ').shift();
                 if (state) {
                     return state;
                 }
