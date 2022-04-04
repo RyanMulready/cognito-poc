@@ -68,12 +68,14 @@ export default {
     publicRuntimeConfig: {
         AWS_COGNITO_USER_POOL_ID: process.env.AWS_COGNITO_USER_POOL_ID,
         AWS_COGNITO_CLIENT_ID: process.env.AWS_COGNITO_CLIENT_ID,
+        AWS_USER_PROFILE_API: process.env.AWS_USER_PROFILE_API,
     },
     router: {
         middleware: ['auth'],
     },
     auth: {
         strategies: {
+            // https://github.com/sirdiego/nuxt-auth-cognito-scheme
             cognito: {
                 tokenType: 'Bearer',
                 globalToken: true,
@@ -92,6 +94,6 @@ export default {
             callback: '/',
             home: '/',
         },
-        plugins: [{ src: '@/plugins/auth-extended.js' }],
+        plugins: [{ src: '@/plugins/api.js' }],
     },
 };

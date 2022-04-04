@@ -54,7 +54,7 @@ export default {
         async onSubmit() {
             this.serverError = '';
             try {
-                await this.$auth.cognito.login({ ...this.form });
+                await this.$api.auth.login(this.form);
                 this.$router.push({ path: '/protected' });
             } catch (e) {
                 this.serverError = e.message || 'Unknown server error';

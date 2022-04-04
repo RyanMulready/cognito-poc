@@ -5,7 +5,7 @@ export default async (ctx) => {
         UserPoolId: ctx.$config.AWS_COGNITO_USER_POOL_ID,
         ClientId: ctx.$config.AWS_COGNITO_CLIENT_ID,
     });
-    ctx.$auth.cognito = {
+    return {
         userPool,
         signup: async ({ username, email, password }) => {
             const emailAttribute = new CognitoUserAttribute({

@@ -127,8 +127,12 @@ export default {
         async submitSignup() {
             this.clearMessages();
             try {
-                await this.$auth.cognito.signup({ ...this.signup });
-                this.code.username = this.signup.username;
+                await this.$api.auth.signup({
+                    username: this.signup.username,
+                    email: this.signup.email,
+                    password: this.signup.password,
+                });
+                this.verify.username = this.signup.username;
                 this.step = 2;
                 this.setSuccessMessage('Signup successful, email verification sent!');
             } catch (e) {
@@ -138,9 +142,9 @@ export default {
         async submitCode() {
             this.clearMessages();
             try {
-                await this.$auth.cognito.verify({ ...this.verify });
+                await this.$api.auth.verify(this.verify);
                 this.setSuccessMessage('Verification successful, please login!');
-                this.$router.push({ path: '/loign' });
+                this.$router.push({ path: '/login' });
             } catch (e) {
                 this.setErrorMessage(e);
             }
@@ -148,7 +152,7 @@ export default {
         async resendCode() {
             this.clearMessages();
             try {
-                await this.$auth.cognito.resend({ ...this.verify });
+                await this.$api.auth.resend(this.verify);
                 this.setSuccessMessage('Verification email resent!');
             } catch (e) {
                 this.setErrorMessage(e);
