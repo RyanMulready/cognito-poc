@@ -9,7 +9,7 @@ export default async (ctx) => {
             if (!username || !email) {
                 return new Error('Username and email are required!');
             }
-            return api.$post('/users/', {
+            return api.$post('/users', {
                 username, email, city, state,
             });
         },
@@ -35,6 +35,7 @@ export default async (ctx) => {
             }
             return api.$delete(`/users/${username}`);
         },
+        list: async () => api.get('/users'),
         search: async ({ city, state }) => {
             if (!city && !state) {
                 return new Error('City or state is required!');

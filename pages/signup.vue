@@ -36,6 +36,26 @@
                     placeholder="Enter password"
                     required />
             </b-form-group>
+            <b-form-group
+                id="input-group-4"
+                label="City:"
+                label-for="city">
+                <b-form-input
+                    id="password"
+                    v-model="signup.city"
+                    type="text"
+                    placeholder="Enter city" />
+            </b-form-group>
+            <b-form-group
+                id="input-group-5"
+                label="State:"
+                label-for="state">
+                <b-form-input
+                    id="state"
+                    v-model="signup.state"
+                    type="text"
+                    placeholder="Enter state" />
+            </b-form-group>
             <b-button
                 type="submit"
                 variant="primary">
@@ -111,6 +131,8 @@ export default {
                 username: '',
                 email: '',
                 password: '',
+                city: '',
+                state: '',
             },
             verify: {
                 username: '',
@@ -132,6 +154,14 @@ export default {
                     email: this.signup.email,
                     password: this.signup.password,
                 });
+                // TODO: If this request fails user is in a strange state what should we do?
+                await this.$api.profile.create({
+                    username: this.signup.username,
+                    email: this.signup.email,
+                    city: this.signup.city,
+                    state: this.signup.state,
+                });
+
                 this.verify.username = this.signup.username;
                 this.step = 2;
                 this.setSuccessMessage('Signup successful, email verification sent!');

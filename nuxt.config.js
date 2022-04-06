@@ -84,8 +84,7 @@ export default {
                 autoFetchUser: true,
                 userPoolId: process.env.AWS_COGNITO_USER_POOL_ID,
                 clientId: process.env.AWS_COGNITO_CLIENT_ID,
-                refreshInterval: 5 * 60 * 1000, // Set to 0 to disable the browser interval
-                fetchUserCallback: false, // Can be used to put more information into the user object
+                refreshInterval: 5 * 60 * 1000,
             },
         },
         redirect: {
