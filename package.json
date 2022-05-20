@@ -37,7 +37,7 @@
         "webpack": "^4.46.0"
     },
     "devDependencies": {
-        "@babel/core": "^7.17.8",
+        "@babel/core": "^7.18.0",
         "@babel/eslint-parser": "^7.17.0",
         "@babel/preset-env": "^7.16.11",
         "@nuxt/postcss8": "^1.1.3",
